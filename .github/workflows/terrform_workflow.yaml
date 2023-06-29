@@ -29,12 +29,16 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
       run: terraform init
       
-    - name: Terraform Plan
-      id: plan
-      env:
-        ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
-        ARM_CLIENT_SECRET: ${{secrets.RM_CLIENT_SECRET}}
-        ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-        ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
-      run:
-        terraform plan -no-color
+    - name: Azure Login
+      run: |
+        az login --identity --username ${{secrets.ARM_CLIENT_ID}}
+      
+   # - name: Terraform Plan
+   #   id: plan
+   #   env:
+   #     ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+   #     ARM_CLIENT_SECRET: ${{secrets.RM_CLIENT_SECRET}}
+   #     ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+   #     ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+   #   run:
+   #     terraform plan -no-color
