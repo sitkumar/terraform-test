@@ -30,3 +30,8 @@ jobs:
         ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
         ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
       run: terraform init
+      
+    - name: terraform Format
+      id: format
+      run: terraform fmt -check
+      continue-on-error: true
