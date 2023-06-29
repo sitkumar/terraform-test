@@ -19,8 +19,6 @@ jobs:
       with:
         terraform_wrapper: false
         
-
-
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform init
       id: init
@@ -31,7 +29,12 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
       run: terraform init
       
-    - name: terraform Format
-      id: format
-      run: terraform fmt -check
-      continue-on-error: true
+    - name: Terraform Plan
+      id: plan
+      env:
+        ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+        ARM_CLIENT_SECRET: ${{secrets.RM_CLIENT_SECRET}}
+        ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+        ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+      run:
+        terraform plan -no-color
