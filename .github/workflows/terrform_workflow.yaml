@@ -31,7 +31,7 @@ jobs:
       
     - name: Azure Login
       run: |
-        az login --identity --username ${{secrets.ARM_CLIENT_ID}}
+        az login -u ${{secrets.AZURE_USER_NAME}} -p ${{secrets.AZURE_PASSWORD}}
       
    # - name: Terraform Plan
    #   id: plan
