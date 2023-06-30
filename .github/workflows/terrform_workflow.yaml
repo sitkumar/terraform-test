@@ -2,7 +2,7 @@ name: Terraform workflow run
 
 on:
   push:
-    branches: [main]
+    branches: [SAAS-123]
 permissions:
       id-token: write
       contents: read
